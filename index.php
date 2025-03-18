@@ -1,45 +1,187 @@
-<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz zgłoszeniowy MMA</title>
+    <link async rel="stylesheet" href="/mma/static/css/global.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 500px; margin: auto; }
-        label, select, input { display: block; margin-bottom: 10px; width: 100%; }
-        button { margin-top: 10px; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
-        #debug { background: #f4f4f4; padding: 10px; margin-top: 20px; border: 1px solid #ddd; }
-        .error { color: red; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        /* form { margin-bottom: 20px; } */
+        /* label, select, input { margin-right: 10px; } */
+
+        .hero-banner {
+            display: grid;
+            min-width: 640px;
+        }
+        .hero-bg-img {
+
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        h2.title {
+            text-align: center;
+        }
+        form.formula {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: flex-start;
+            justify-content: space-between;
+            align-items: flex-start;
+        }        
+
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px;
+            background-color: #121212;
+            color: white;
+        }
+        .main-wrap {
+            min-width: 600px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 680px) {
+            body {
+                font-size: 0.9em;
+            }
+            .main-wrap, .hero-banner {
+                min-width: 400px;
+                columns: 3 100px;
+                font-size: 0.9em;
+            }
+        }
+
+
+        h2 {
+            text-align: center;
+        }
+        .button-toggle {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #333;
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .button-toggle.active {
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+            min-height: 250px;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            width: 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: flex-start;
+        }
+
+        .form-group label {
+            flex: 1;
+            padding-right: 10px;
+            max-width: 90px;
+        }
+        .form-group input,
+        .form-group select {
+            flex: 2;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+            background: #2c2c2c;
+            color: white;
+            max-width: fit-content;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #debug {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: black;
+        }
+        .error {
+            color: red;
+        }
     </style>
 </head>
-<body>
-    <h2>Formularz zgłoszeniowy</h2>
-    <form id="mmaForm">
-        <label for="formula">Formuła:</label>
-        <select id="formula" name="formula"></select>
+<body class="dark">
+    <div class="hero-banner">
+        <div class="hero-bg-img">
+            <img src="/mma/static/img/tlofbmma.png">
+        </div>
+    </div><div class="main-wrap">
+        
+        <h2>Formularz zgłoszeniowy</h2>
 
-        <label for="category">Kategoria:</label>
-        <select id="category" name="category"></select>
+        <form id="mmaForm">
+            <div class="form-group">
+                <label for="formula">Formuła:</label>
+                <select id="formula" name="formula"></select>
+            </div><div class="form-group">
+                <label for="category">Kategoria:</label>
+                <select id="category" name="category"></select>
+            </div><div class="form-group">
+                <label for="weight">Kategoria wagowa:</label>
+                <select id="weight" name="weight"></select>
+            </div><div class="form-group">
+                <label for="name">Imię i nazwisko:</label>
+                <input type="text" id="name" name="name" required>
+            </div><div class="form-group">
+                <label for="age">Wiek:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <p id="ageError" class="error"></p>
+            <button type="submit">Zgłoś zawodnika</button>
+        </form>
 
-        <label for="weight">Kategoria wagowa:</label>
-        <select id="weight" name="weight"></select>
-
-        <label for="name">Imię i nazwisko:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="age">Wiek:</label>
-        <input type="number" id="age" name="age" required>
-        <p id="ageError" class="error"></p>
-
-        <button type="submit">Zgłoś zawodnika</button>
-    </form>
-
-    <div id="debug">
-        <h3>Debug log:</h3>
-        <ul id="debugLog"></ul>
+        <div id="debug">
+            <h3>Debug log:</h3>
+            <ul id="debugLog"></ul>
+        </div>
     </div>
-
     <script>
         function logDebug(message) {
             const logList = document.getElementById("debugLog");
