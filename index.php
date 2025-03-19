@@ -35,10 +35,18 @@
         }        
 
         body { 
-            font-family: Arial, sans-serif; 
+            /* font-family: Arial, sans-serif; 
             margin: 20px;
             background-color: #121212;
             color: white;
+            font-family: Arial, sans-serif; */
+            margin: 20px;
+            background-color: #f9f470;
+            background: repeating-radial-gradient(#44491a, #0d3110 130px);
+            background: linear-gradient(179deg, #44491a, #0d3110);
+            color: white;
+            margin: 2.3em;
+            padding: 0;
         }
         .main-wrap {
             min-width: 600px;
@@ -136,11 +144,12 @@
             background: #0056b3;
         }
         #debug {
-            background: #f4f4f4;
+            background: repeating-linear-gradient(223deg, black, transparent 350px);
             padding: 10px;
             margin-top: 20px;
             border-radius: 5px;
-            color: black;
+            color: #eee;
+            font-size: 0.6em;
         }
         .error {
             color: red;
