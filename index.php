@@ -1,385 +1,75 @@
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formularz zgłoszeniowy MMA</title>
-    <link async rel="stylesheet" href="/mma/static/css/global.css">
-    <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #007bff; color: white; }
-        /* form { margin-bottom: 20px; } */
-        /* label, select, input { margin-right: 10px; } */
-
-        .hero-banner {
-            display: grid;
-            min-width: 640px;
-        }
-        .hero-bg-img {
-
-        }
-        img {
-            width: 100%;
-            height: auto;
-        }
-        h2.title {
-            text-align: center;
-        }
-        form.formula {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-content: flex-start;
-            justify-content: space-between;
-            align-items: flex-start;
-        }        
-
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px;
-            background-color: #121212;
-            color: white;
-        }
-        .main-wrap {
-            min-width: 600px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        @media screen and (max-width: 680px) {
-            body {
-                font-size: 0.9em;
-            }
-            .main-wrap, .hero-banner {
-                min-width: 400px;
-                columns: 3 100px;
-                font-size: 0.9em;
-            }
-        }
-
-
-        h2 {
-            text-align: center;
-        }
-        .button-toggle {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            background: #333;
-            color: white;
-            border: 2px solid white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        .button-toggle.active {
-            background: white;
-            color: black;
-            border: 2px solid black;
-        }
-        form {
-            display: flex;
-            flex-direction: row;
-            min-height: 250px;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            margin-left: 20px;
-            width: 100%;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            justify-content: flex-start;
-        }
-
-        .form-group label {
-            flex: 1;
-            padding-right: 10px;
-            max-width: 90px;
-        }
-        .form-group input,
-        .form-group select {
-            flex: 2;
-            padding: 8px;
-            border-radius: 4px;
-            border: none;
-            font-size: 16px;
-            background: #2c2c2c;
-            color: white;
-            max-width: fit-content;
-        }
-        button {
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        #debug {
-            background: #f4f4f4;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-            color: black;
-        }
-        .error {
-            color: red;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMA Polska Clone</title>
+  <link rel="stylesheet" href="/mma/static/css/style.css">
+  <script src="/mma/static/js/script.js" defer></script>
 </head>
-<body class="dark">
-    <div class="hero-banner">
-        <div class="hero-bg-img">
-            <img src="/mma/static/img/tlofbmma.png">
-        </div>
-    </div><div class="main-wrap">
-        
-        <h2>Formularz zgłoszeniowy</h2>
+<body>
+  <header>
+    <img src="/mma/static/img/time-of-masters-logo-400.png" alt="MMA Polska" class="logo">
+    <nav>
+      <ul>
+        <li><a href="#">Zawody</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">O nas</a></li>
+        <li><a href="#">Zespół</a></li>
+        <li><a href="#">Sekcje</a></li>
+        <li><a href="#">Kadra Polski</a></li>
+        <li><a href="#">Ambasadorowie</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <form id="mmaForm">
-            <div class="form-group">
-                <label for="formula">Formuła:</label>
-                <select id="formula" name="formula"></select>
-            </div><div class="form-group">
-                <label for="category">Kategoria:</label>
-                <select id="category" name="category"></select>
-            </div><div class="form-group">
-                <label for="weight">Kategoria wagowa:</label>
-                <select id="weight" name="weight"></select>
-            </div><div class="form-group">
-                <label for="name">Imię i nazwisko:</label>
-                <input type="text" id="name" name="name" required>
-            </div><div class="form-group">
-                <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-            <p id="ageError" class="error"></p>
-            <button type="submit">Zgłoś zawodnika</button>
-        </form>
-
-        <div id="debug">
-            <h3>Debug log:</h3>
-            <ul id="debugLog"></ul>
-        </div>
+  <div class="hero" style="background-image: url('/mma/static/img/tlofbmma.png');">
+    <div class="hero-content">
+      <?php if (1==1) { ?>
+      <div class="hero-bg-img">
+      <a href="zgloszenie-udzialu.php"><img src="/mma/static/img/tlofbmma.png"></a>
+      </div>
+      <?php } else { ?>
+      <h1></h1>
+      <p></p>
+      <?php } ?>
     </div>
-    <script>
-        function logDebug(message) {
-            const logList = document.getElementById("debugLog");
-            const logItem = document.createElement("li");
-            logItem.textContent = message;
-            logList.appendChild(logItem);
-        }
+  </div>
 
-        const data = {
-            "formula": {
-                "MMA": {
-                    "ages_category": [
-                        {"code": "KU14", "name": "Kadeci U14", "od": 12, "do": 13},
-                        {"code": "KU16", "name": "Kadeci U16", "od": 14, "do": 15},
-                        {"code": "KU18", "name": "Kadeci U18", "od": 17, "do": 16},
-                        {"code": "JM18", "name": "Juniorzy 18-21", "od": 18, "do": 21},
-                        {"code": "JK18", "name": "Juniorki 18-21", "od": 18, "do": 21},
-                        {"code": "SM21", "name": "Seniorzy 21+", "od": 21},
-                        {"code": "SK21", "name": "Seniorki 21+", "od": 21},
-                        {"code": "SM21PK", "name": "Seniorzy 21+ pierwszy krok", "od": 21},
-                        {"code": "SK21PK", "name": "Seniorki 21+ pierwszy krok", "od": 21},
-                        {"code": "SM21FC", "name": "Seniorzy 21+ full contact", "od": 21},
-                        {"code": "SK21FC", "name": "Seniorki 21+ full contact", "od": 21}
-                    ],
-                    "scale_category": [
-                        {"code": "KU14", "scale": ["31kg", "34kg", "37kg", "40kg", "44kg", "48kg", "52kg", "57kg", "62kg"]},
-                        {"code": "KU16", "scale": ["40kg", "44kg", "48kg", "52kg", "57kg", "62kg", "67kg", "72kg", "77.1kg"]},
-                        {"code": "KU18", "scale": ["52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg", "77.1kg", "83.9kg", "93kg", "120.2kg"]},
-                        {"code": "JM18", "scale": ["52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg", "77.1kg", "83.9kg", "93kg", "120.2kg", "120.3kg-300.00kg"]},
-                        {"code": "JK18", "scale": ["47.5kg", "52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg"]},
-                        {"code": "SM21", "scale": ["52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg", "77.1kg", "83.9kg", "93kg", "120.2kg", "120.3kg-300.00kg"]},
-                        {"code": "SK21", "scale": ["47.5kg", "52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg"]},
-                        {"code": "SM21PK", "scale": ["52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg", "77.1kg", "83.9kg", "93kg", "120.2kg", "120.3kg-300.00kg"]},
-                        {"code": "SK21PK", "scale": ["47.5kg", "52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg"]},
-                        {"code": "SM21FC", "scale": ["52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg", "77.1kg", "83.9kg", "93kg", "120.2kg", "120.3kg-300.00kg"]},
-                        {"code": "SK21FC", "scale": ["47.5kg", "52.2kg", "56.7kg", "61.2kg", "65.8kg", "70.3kg"]}
-                    ]
-                },
-                "K1": {
-                    "ages_category": [
-                        {"code": "JK", "name": "Juniorzy kobiety"},
-                        {"code": "JM", "name": "Juniorzy mężczyźni"},
-                        {"code": "SK", "name": "Seniorzy kobiety"},
-                        {"code": "SM", "name": "Seniorzy mężczyźni"} 
-                    ],
-                    "scale_category": [
-                        {"code": "JK", "scale": ["50kg", "57kg", "64kg", "64kg+"]},
-                        {"code": "JM", "scale": ["60kg", "66kg", "72kg", "78kg", "84kg", "84kg+"]},
-                        {"code": "SK", "scale": ["50kg", "57kg", "64kg", "64kg+"]},
-                        {"code": "SM", "scale": ["60kg", "66kg", "72kg", "78kg", "84kg", "90kg", "90kg+"]}
-                    ]
-                }
-            }
-        };
+  <main>
+    <div class="championship">
+      <h2>MISTRZOSTWA MMA Bojano</h2>
+      <p><a href="zgloszenie-udzialu.php">Zapisz się już dziś.</a></p>
+    </div>
 
-        const formulaSelect = document.getElementById("formula");
-        const categorySelect = document.getElementById("category");
-        const weightSelect = document.getElementById("weight");
-        const ageInput = document.getElementById("age");
-        const ageError = document.getElementById("ageError");
+    <div class="news">
+      <div class="news-item">
+        <h3>Historyczny sukces polskiej kadry MMA</h3>
+        <p>Kadra Polski w mieszanych sztukach walki zakończyła rywalizację podczas Mistrzostw Europy IMMAF 2025. Młodzi zawodnicy wywalczyli szesnaście medali.</p>
+      </div>
 
-        function populateFormulas() {
-            logDebug("=======>populateFormulas");
-            formulaSelect.innerHTML = "";
-            Object.keys(data.formula).forEach(formula => {
-                let option = document.createElement("option");
-                option.value = formula;
-                option.textContent = formula;
-                formulaSelect.appendChild(option);
-            });
-            updateCategories();
-        }
+      <div class="news-item">
+        <h3>Srebro Pauliny Konik</h3>
+        <p>W ostatnim dniu Mistrzostw Europy IMMAF 2025 jedyna reprezentantka Polski seniorów wywalczyła medal srebrny.</p>
+      </div>
 
-        function updateCategories() {
-            logDebug("=======>updateCategories");
-            const selectedFormula = formulaSelect.value;
-            categorySelect.innerHTML = "";
-            data.formula[selectedFormula].ages_category.forEach(category => {
-                let option = document.createElement("option");
-                option.value = category.code;
-                option.textContent = category.name;
-                categorySelect.appendChild(option);
-            });
-            updateWeights();
-        }
+      <div class="news-item">
+        <h3>Trzy złota i srebro juniorów</h3>
+        <p>W przedostatnim dniu Mistrzostw Europy IMMAF 2025 troje juniorów z polskiej kadry wywalczyło tytuły mistrzowskie.</p>
+      </div>
+    </div>
 
-        function updateWeights() {
-            logDebug("=======>updateWeights");
-            const selectedFormula = formulaSelect.value;
-            const selectedCategory = categorySelect.value;
-            weightSelect.innerHTML = "";
-            let formula_scale_categories = data.formula[selectedFormula].scale_category;
-            formula_scale_categories.forEach(scale_categories => {
-                if (selectedCategory && scale_categories['code'] == selectedCategory) {
-                    scale_categories['scale'].forEach(scale => {
-                        let option = document.createElement("option");
-                        option.value = scale;
-                        option.textContent = scale;
-                        weightSelect.appendChild(option);
-                    })
-                }
-            });
-        }
+    <div id="about" class="about">
+      <h2>O nas</h2>
+      <p>„MMA Polska Stowarzyszenie" to organizacja powołana do reprezentowania środowiska Mieszanych Sztuk Walki w debacie publicznej oraz w mediach. Głównym celem Stowarzyszenia jest dbanie o pozytywny wizerunek MMA, scalenie amatorskiego środowiska a w przyszłości wprowadzenie dyscypliny do grona sportów olimpijskich.</p>
+      <p>Zajmiemy się edukacją młodzieży, szkoleniem zawodników i trenerów, dbaniem o bezpieczeństwo w sportowej rywalizacji oraz wdrażaniem i prowadzniem projektów społecznych. Jako jedyna polska organizacja MMA POLSKA jest zrzeszona w strukturach światowej Federacji - International Mixed Martial Arts Federation (IMMAF). Tym samym - również jako jedyna organizacja w Polsce - będzie reprezentować polskie MMA na arenie międzynarodowej.</p>
+    </div>
+  </main>
 
-        function validateAge() {
-            const selectedFormula = formulaSelect.value;
-            const selectedCategory = categorySelect.value;
-            const age = parseInt(ageInput.value, 10);
-            const category = data.formula[selectedFormula].ages_category.find(cat => cat.code === selectedCategory);
-            if (category && (age < category.od || (category.do && age > category.do))) {
-                ageError.textContent = `Wiek musi być pomiędzy ${category.od} a ${category.do || '∞'} lat.`;
-                return false;
-            }
-            ageError.textContent = "";
-            return true;
-        }
-
-        function submitForm(event) {
-            event.preventDefault();
-            if (!validateAge()) {
-                logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
-                return;
-            }
-
-            const formData = new FormData(document.getElementById("mmaForm"));
-
-            fetch("save.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => {
-                logDebug("Nagłówek Content-Type: " + response.headers.get("content-type"));
-                if (!response.ok) {
-                    throw new Error("HTTP error! Status: " + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                logDebug("Otrzymana odpowiedź: " + JSON.stringify(data.success));
-                
-                if (typeof data !== "object" || data === null) {
-                    throw new Error("Odpowiedź nie jest poprawnym JSON-em.");
-                }
-
-                if (data.success) {
-                    logDebug("Przekierowanie do PayU: " + data.sessionId);
-                    window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data.sessionId);
-                } else {
-                    logDebug("Błąd: " + (data.error || "Nieznany błąd"));
-                    alert("Błąd: " + (data.error || "Nieznany błąd"));
-                }
-            })
-            .catch(error => {
-                logDebug("Błąd podczas przetwarzania: " + error.message);
-                alert("Błąd: " + error.message);
-            });
-        }
-
-        function submitForm_depr(event) {
-            event.preventDefault();
-            if (!validateAge()) {
-                logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
-                return;
-            }
-            
-            const formData = new FormData(document.getElementById("mmaForm"));
-            fetch("save.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                console.log(data.success);
-                console.log(data['success']);
-
-                logDebug("Odpowiedź z serwera: data => " + data);
-                if (data.success) {
-                    window.location.href = "https://secure.payu.com/pay?sessionId=" + data.sessionId;
-                } else {
-                    logDebug("Odpowiedź z serwera: data.success => " + data.success);
-                    // alert("Błąd: " + data.error);
-                }
-                // alert("Odpowiedź serwera: " + data);
-            })
-            .catch(error => {
-                logDebug("Błąd podczas wysyłania danych: " + error);
-                alert("Błąd podczas wysyłania danych.");
-            });
-        }
-
-        formulaSelect.addEventListener("change", updateCategories);
-        categorySelect.addEventListener("change", updateWeights);
-        ageInput.addEventListener("input", validateAge);
-
-        document.getElementById("mmaForm").addEventListener("submit", submitForm);
-
-        populateFormulas();
-    </script>
+  <footer>
+    <img src="https://ext.same-assets.com/2492407102/1361968999.png" alt="MMA Polska">
+    <p>MMA POLSKA</p>
+    <p>© <span class="current-year">2025</span> All Rights Reserved timeofmasters.pl</p>
+  </footer>
 </body>
 </html>
