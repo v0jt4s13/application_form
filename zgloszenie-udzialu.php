@@ -40,30 +40,7 @@
         }
 
 
-        .main-wrap {
-            max-width: 1200px;
-            min-width: 600px;
-            margin: auto;
-            /* background: #1e1e1e; */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
 
-        @media screen and (max-width: 680px) {
-            body {
-                font-size: 0.9em;
-            }
-            .main-wrap, .hero-banner {
-                min-width: 350px;
-                /* columns: 3 100px; */
-                font-size: 0.9em;
-            }
-        }
         h2.title {
             text-align: center;
         }
