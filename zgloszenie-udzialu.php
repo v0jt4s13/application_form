@@ -1,113 +1,66 @@
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formularz zgłoszeniowy MMA</title>
-    <link async rel="stylesheet" href="/mma/static/css/global.css">
-    <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #007bff; color: white; }
-        /* form { margin-bottom: 20px; } */
-        /* label, select, input { margin-right: 10px; } */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Of Masters</title>
+  <link rel="stylesheet" href="/mma/static/css/style.css">
+  <script src="/mma/static/js/script.js" defer></script>
 
-        .hero-banner {
-            display: grid;
-            min-width: 640px;
+  <style>
+        body {
+            transition: background 0.5s ease-in-out, color 0.5s ease-in-out, font-family 0.5s ease-in-out;
+            font-size: 18px;
+            text-align: center;
         }
-        .hero-bg-img {
-
-        }
-        img {
+        .btn-container {
+            position: fixed;
+            top: 120px;
+            left: -10px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
             width: 100%;
-            height: auto;
+            z-index: 111;
+            justify-content: flex-end;
         }
+        .btn-style {
+            padding: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: min-content;
+            text-align: center;
+        }
+        .btn-style:hover {
+            background: rgba(0, 0, 0, 1);
+        }
+
+
+
         h2.title {
             text-align: center;
         }
-        form.formula {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-content: flex-start;
-            justify-content: space-between;
-            align-items: flex-start;
-        }        
-
-        body { 
-            /* font-family: Arial, sans-serif; 
-            margin: 20px;
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif; */
-            margin: 20px;
-            background-color: #f9f470;
-            background: repeating-radial-gradient(#44491a, #0d3110 130px);
-            background: linear-gradient(179deg, #44491a, #0d3110);
-            color: white;
-            margin: 2.3em;
-            padding: 0;
-        }
-        .main-wrap {
-            min-width: 600px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        @media screen and (max-width: 680px) {
-            body {
-                font-size: 0.9em;
-            }
-            .main-wrap, .hero-banner {
-                min-width: 400px;
-                columns: 3 100px;
-                font-size: 0.9em;
-            }
-        }
-
-
         h2 {
             text-align: center;
         }
-        .button-toggle {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            background: #333;
-            color: white;
-            border: 2px solid white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        .button-toggle.active {
-            background: white;
-            color: black;
-            border: 2px solid black;
-        }
         form {
             display: flex;
-            flex-direction: row;
             min-height: 250px;
             flex-wrap: wrap;
-            align-content: flex-start;
-            justify-content: flex-start;
-            align-items: flex-start;
+            flex-direction: column;
+            padding: 20px;
+            background: whitesmoke;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
         .form-group {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            margin-left: 20px;
+            margin: 10px 20px;
             width: 100%;
             flex-direction: row;
             flex-wrap: wrap;
@@ -131,6 +84,26 @@
             color: white;
             max-width: fit-content;
         }
+        form.formula {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: flex-start;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        #debug {
+            background: repeating-linear-gradient(178deg, #0c2103, transparent 540px);
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: #eee;
+            font-size: 0.6em;
+            width: -webkit-fill-available;
+        }
+        .error {
+            color: red;
+        }
         button {
             padding: 10px;
             background: #007bff;
@@ -139,29 +112,36 @@
             cursor: pointer;
             font-size: 16px;
             border-radius: 4px;
+            width: 100%;
         }
         button:hover {
             background: #0056b3;
         }
-        #debug {
-            background: repeating-linear-gradient(223deg, black, transparent 350px);
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-            color: #eee;
-            font-size: 0.6em;
-        }
-        .error {
-            color: red;
-        }
-    </style>
+  </style>
 </head>
-<body class="dark">
-    <div class="hero-banner">
+<body>
+  <?php
+    require("header.php");
+  ?>
+    <div class="hero" style="background-image: url('/mma/static/img/thewinneris.png');">
+        <div class="hero-content">
+        <?php if (1==1) { ?>
         <div class="hero-bg-img">
-            <img src="/mma/static/img/tlofbmma.png">
+        <a href="zgloszenie-udzialu.php"><img src="/mma/static/img/tlofbmma.png"></a>
         </div>
-    </div><div class="main-wrap">
+        <?php } else { ?>
+        <h1></h1>
+        <p></p>
+        <?php } ?>
+        </div>
+    </div>
+    <div class="btn-container">
+        <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
+        <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>
+        <button class="btn-style" onclick="changeFontStyle()">Zmień czcionkę</button>
+    </div>
+
+    <div class="main-wrap">
         
         <h2>Formularz zgłoszeniowy</h2>
 
@@ -189,8 +169,44 @@
         <div id="debug">
             <h3>Debug log:</h3>
             <ul id="debugLog"></ul>
+            
+            <script>
+                const backgrounds = [
+                    "background-color: #f9f470;",
+                    "background: repeating-radial-gradient(#44491a, #0d3110 130px);",
+                    "background: linear-gradient(179deg, #44491a, #0d3110);",
+                    "background: linear-gradient(268deg, #0c2103, transparent 620px);"
+                ];
+
+                const fontColors = ["#ff5733", "#33ff57", "#3357ff", "#f1c40f", "#8e44ad"];
+                const fontStyles = ["Arial, sans-serif", "Courier New, monospace", "Georgia, serif", "Times New Roman, serif", "Verdana, sans-serif"];
+
+                let bgIndex = 0;
+                let colorIndex = 0;
+                let fontIndex = 0;
+
+                function changeBackground() {
+                    document.body.style = backgrounds[bgIndex];
+                    bgIndex = (bgIndex + 1) % backgrounds.length;
+                }
+
+                function changeFontColor() {
+                    document.body.style.color = fontColors[colorIndex];
+                    colorIndex = (colorIndex + 1) % fontColors.length;
+                }
+
+                function changeFontStyle() {
+                    document.body.style.fontFamily = fontStyles[fontIndex];
+                    fontIndex = (fontIndex + 1) % fontStyles.length;
+                }
+            </script>
         </div>
     </div>
+
+    <?php
+    require("footer.php");
+    ?>
+
     <script>
         function logDebug(message) {
             const logList = document.getElementById("debugLog");
@@ -308,7 +324,7 @@
             return true;
         }
 
-        function submitForm(event) {
+        function submitForm_old(event) {
             event.preventDefault();
             if (!validateAge()) {
                 logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
@@ -341,6 +357,65 @@
                 } else {
                     logDebug("Błąd: " + (data.error || "Nieznany błąd"));
                     alert("Błąd: " + (data.error || "Nieznany błąd"));
+                }
+            })
+            .catch(error => {
+                logDebug("Błąd podczas przetwarzania: " + error.message);
+                alert("Błąd: " + error.message);
+            });
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            if (!validateAge()) {
+                logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
+                return;
+            }
+
+            const formData = new FormData(document.getElementById("mmaForm"));
+
+            fetch("save.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                logDebug("Nagłówek Content-Type: " + response.headers.get("content-type"));
+                if (!response.ok) {
+                    throw new Error("HTTP error! Status: " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                logDebug("Otrzymana odpowiedź: " + JSON.stringify(data));
+
+                if (typeof data !== "object" || data === null) {
+                    throw new Error("Odpowiedź nie jest poprawnym JSON-em.");
+                }
+
+                if (data.success) {
+                    logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
+
+                    // Tworzenie zamówienia w PayU
+                    return fetch("create_order.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            name: formData.get("name"),
+                            amount: 10000, // Przykładowa kwota w groszach (100 PLN)
+                            email: "klient@example.com" // Można pobrać z formularza
+                        })
+                    });
+                } else {
+                    throw new Error(data.error || "Nieznany błąd zapisu zgłoszenia.");
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    logDebug("Przekierowanie do PayU: " + data.sessionId);
+                    window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data.sessionId);
+                } else {
+                    throw new Error("Błąd przy tworzeniu płatności: " + (data.error || "Nieznany błąd"));
                 }
             })
             .catch(error => {
