@@ -1,10 +1,13 @@
+<?php
+  require("global.php");
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista startowa</title>
-    <link async rel="stylesheet" href="/mma/static/css/global.css">
+    <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/global.css">
     <style>
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -146,7 +149,7 @@
 <body class="dark">
     <div class="hero-banner">
         <div class="hero-bg-img">
-            <img src="/mma/static/img/tlofbmma.png">
+            <img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png">
         </div>
     </div><div class="main-wrap">
 
