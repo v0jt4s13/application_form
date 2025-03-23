@@ -1,11 +1,14 @@
+<?php
+  require("global.php");
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Of Masters</title>
-  <link rel="stylesheet" href="/mma/static/css/style.css">
-  <script src="/mma/static/js/script.js" defer></script>
+  <link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/style.css">
+  <script src="<?php echo $global_domain; ?>/static/js/script.js" defer></script>
 
   <style>
         body {
@@ -123,11 +126,11 @@
   <?php
     require("header.php");
   ?>
-    <div class="hero" style="background-image: url('/mma/static/img/thewinneris.png');">
+    <div class="hero" style="background-image: url('<?php echo $global_domain; ?>/static/img/thewinneris.png');">
         <div class="hero-content">
         <?php if (1==1) { ?>
         <div class="hero-bg-img">
-        <a href="zgloszenie-udzialu.php"><img src="/mma/static/img/tlofbmma.png"></a>
+        <a href="zgloszenie-udzialu.php"><img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png"></a>
         </div>
         <?php } else { ?>
         <h1></h1>

@@ -1,5 +1,5 @@
 <header>
-    <img src="/mma/static/img/logo-450x300.png" alt="Time Of Masters" class="logo">
+    <img src="<?php echo $global_domain; ?>/static/img/logo-450x300.png" alt="Time Of Masters" class="logo">
     <div class="hamburger" onclick="toggleMenu()">
         <div></div>
         <div></div>
