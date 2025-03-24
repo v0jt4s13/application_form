@@ -1,7 +1,11 @@
 <?php
 header("Content-Type: application/json");
-
+file_put_contents("debug_post.log", print_r($_POST, true));
 $posId = 'Twój_POS_ID';
+if ($posId == 'Twój_POS_ID') {
+    echo json_encode(["success" => false, "error" => "Płatności nie zostały do końca skonfigurowane."]);
+    exit;
+}
 $oauthClientId = 'Twój_Client_ID';
 $oauthClientSecret = 'Twój_Client_Secret';
 $notifyUrl = 'https://twoja_domena.pl/notify.php';
@@ -11,7 +15,7 @@ $continueUrl = 'https://twoja_domena.pl/sukces.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-if ($posId == 'Twój_POS_ID' || !isset($data["name"], $data["amount"], $data["email"])) {
+if (!isset($data["name"], $data["amount"], $data["email"])) {
     echo json_encode(["success" => false, "error" => "Brak wymaganych danych"]);
     exit;
 }
