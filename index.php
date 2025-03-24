@@ -22,7 +22,7 @@
     <div class="hero-content">
       <?php if (1==1) { ?>
       <div class="hero-bg-img">
-      <a href="zgloszenie-udzialu.php"><img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png"></a>
+      <a href="entry_form/"><img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png"></a>
       </div>
       <?php } else { ?>
       <h1></h1>
@@ -33,7 +33,7 @@
 
   <main>
     <div class="championship">
-      <a href="zgloszenie-udzialu.php" class="zgloszenia">
+      <a href="entry_form/" class="zgloszenia">
         <h2>MISTRZOSTWA Amatorskiego MMA Bojano</h2>
         <p>Zapisz się do udziału już dziś.</p>
       </a>

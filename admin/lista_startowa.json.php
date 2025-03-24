@@ -1,10 +1,10 @@
 <?php
-file_put_contents("debug_post.log", print_r($_POST, true));
+// file_put_contents("debug_post.log", print_r($_POST, true));
 
 header('Content-Type: application/json');
 // header('Content-Type: text/html; charset=UTF-8');
 
-$dataFile = '../form_response_data/zgloszenia.json';
+$dataFile = '../entry_form/form_response_data/zgloszenia.json';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!file_exists($dataFile) || filesize($dataFile) == 0) {
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $data = json_decode(file_get_contents($dataFile), true);
-    file_put_contents("debug_data.log", print_r($data, true));
+    // file_put_contents("debug_data.log", print_r($data, true));
     if (!$data) {
         http_response_code(200); // lub 500 jeśli to błąd
         echo json_encode(["success" => false, "message" => "Brak zgłoszeń"]);
@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(["success" => true, "data" => $filteredData]);
     exit;
 }
-file_put_contents("debug_filtered.log", print_r($filteredData, true));
-file_put_contents("debug_headers.log", print_r(getallheaders(), true));
+// file_put_contents("debug_filtered.log", print_r($filteredData, true));
+// file_put_contents("debug_headers.log", print_r(getallheaders(), true));
 
 echo json_encode(["success" => false, "message" => "Niepoprawne żądanie"]);
 exit;

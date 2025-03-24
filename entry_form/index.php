@@ -1,40 +1,187 @@
-
+<?php
+  require("../global.php");
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Of Masters</title>
-  <link rel="stylesheet" href="/static/css/style.css">
-  <script src="/static/js/script.js" defer></script>
+  <link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/style.css">
+  <script src="<?php echo $global_domain; ?>/static/js/script.js" defer></script>
 
+  <style>
+        body {
+            transition: background 0.5s ease-in-out, color 0.5s ease-in-out, font-family 0.5s ease-in-out;
+            font-size: 18px;
+            text-align: center;
+        }
+        .btn-container {
+            position: fixed;
+            top: 120px;
+            left: -10px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            width: 100%;
+            z-index: 111;
+            justify-content: flex-end;
+        }
+        .btn-style {
+            padding: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: min-content;
+            text-align: center;
+        }
+        .btn-style:hover {
+            background: rgba(0, 0, 0, 1);
+        }
+
+
+
+        h2.title {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        /* form {
+            min-height: 250px;
+            flex-wrap: wrap;
+            flex-direction: column;
+            padding: 20px;
+            background: whitesmoke;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        } */
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0px;
+            margin-right: 40px;
+            width: 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: flex-start;
+        }
+
+        .form-group label {
+            flex: 1;
+            padding-right: 10px;
+            max-width: 160px;
+            white-space: nowrap;
+            text-align: end;
+            width: 130px;
+        }
+        .form-group input,
+        .form-group select {
+            flex: 2;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+            background: #2c2c2c;
+            color: white;
+            max-width: fit-content;
+        }
+        form.formula {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: flex-start;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        #debug {
+            background: repeating-linear-gradient(178deg, #0c2103, transparent 540px);
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: #eee;
+            font-size: 0.6em;
+            width: -webkit-fill-available;
+        }
+        .error {
+            color: red;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .mmaForm {
+            min-height: 250px;
+            flex-wrap: wrap;
+            flex-direction: column;
+            padding: 20px;
+            background: whitesmoke;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media screen and (max-width: 680px) {
+            div.mmaForm {
+                /* width: 300px; */
+                /* background: red; */
+                /* width: 50%; */
+                /* min-width: 450px; */
+                /* display: flex; */
+            }
+            .form-group {
+                display: flex;
+                font-size: 1.2em;
+                flex-direction: column;
+                align-content: center;
+                align-items: flex-start;
+            }
+            .form-group label {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                padding: 7px;
+                text-align: left;
+                /* background: blue; */
+            }
+        }
+
+
+            /* flex: 1;
+            padding-right: 10px;
+            max-width: 160px;
+            white-space: nowrap;
+            text-align: end;
+            width: 130px; */
+  </style>
 </head>
 <body>
-  <header>
-    <img src="/static/img/logo-450x300.png" alt="Time Of Masters" class="logo">
-    <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#">Zawody</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">O nas</a></li>
-        <li><a href="#">Zespół</a></li>
-        <li><a href="#">Sekcje</a></li>
-        <li><a href="#">Kadra Polski</a></li>
-        <li><a href="#">Ambasadorowie</a></li>
-      </ul>
-    </nav>
-  </header>
-    <div class="hero" style="background-image: url('/static/img/thewinneris.png');">
+  <?php
+    require("../header.php");
+  ?>
+    <div class="hero" style="background-image: url('<?php echo $global_domain; ?>/static/img/thewinneris.png');">
       <div class="hero-content">
-                    <div class="hero-bg-img">
-                <a href="zgloszenie-udzialu.php"><img src="/static/img/tlofbmma.png"></a>
+        <?php if (1==1) { ?>
+            <div class="hero-bg-img">
+                <a href="zgloszenie-udzialu.php"><img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png"></a>
             </div>
-              </div>
+        <?php } else { ?>
+            <h1></h1>
+            <p></p>
+        <?php } ?>
+      </div>
     </div>
     <div class="btn-container">
         <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
@@ -65,7 +212,20 @@
             </div><div class="form-group">
                 <label for="age">Wiek:</label>
                 <input type="number" id="age" name="age" required>
+            </div><div class="form-group">
+                <label for="club">Nazwa klubu:</label>
+                <input type="text" id="club" name="club" list="clubs">
+                <datalist id="clubs">
+                    <option value="niezrzeszony">
+                </datalist>
+            </div><div class="form-group">
+                <label for="email">Adres e-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div><div class="form-group">
+                <label for="phone">Numer telefonu:</label>
+                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required>
             </div>
+
             <p id="ageError" class="error"></p>
             <button type="submit">Zgłoś zawodnika</button>
           </div>
@@ -108,16 +268,10 @@
         </div>
     </div>
 
-    <footer>
-    <!--<img src="/static/img/thewinneris-w300.png" alt="Time Of Masters">//-->
-    <p>Time Of Masters</p>
-    <p>© <span class="current-year">2025</span> All Rights Reserved timeofmasters.pl</p>
-</footer>
-<script>
-  function toggleMenu() {
-      document.querySelector("nav ul").classList.toggle("active");
-  }
-</script>
+    <?php
+    require("../footer.php");
+    ?>
+
     <script>
         function logDebug(message) {
             const logList = document.getElementById("debugLog");
@@ -234,7 +388,7 @@
             ageError.textContent = "";
             return true;
         }
-/*
+
         function submitForm(event) {
             event.preventDefault();
             if (!validateAge()) {
@@ -249,7 +403,7 @@
                 body: formData
             })
             .then(response => {
-                logDebug("Nagłówek Content-Type: " + response.headers.get("content-type"));
+                logDebug("save.php -> Nagłówek Content-Type: " + response.headers.get("content-type"));
                 if (!response.ok) {
                     throw new Error("HTTP error! Status: " + response.status);
                 }
@@ -266,120 +420,48 @@
                     logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
 
                     // Tworzenie zamówienia w PayU
-                    return fetch("create_order.php", {
+                    // return fetch("create_order.php", {
+                    //     method: "POST",
+                    //     headers: { "Content-Type": "application/json" },
+                    //     body: JSON.stringify({ 
+                    //         name: formData.get("name"),
+                    //         amount: <?php echo $ammount_to_pay; ?>, // Przykładowa kwota w groszach (100 PLN)
+                    //         email: formData.get("email")
+                    //     })
+                    // });
+
+
+                    fetch("../create_order.php", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ 
                             name: formData.get("name"),
-                            amount: 10000, // Przykładowa kwota w groszach (100 PLN)
-                            email: "klient@example.com" // Można pobrać z formularza
+                            amount: <?php echo $ammount_to_pay; ?>, // Przykładowa kwota w groszach (100 PLN)
+                            email: formData.get("email")
                         })
+                    })
+                    .then(response_co => {
+                        logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
+                        if (!response_co.ok) {
+                            throw new Error("HTTP error! Status: " + response_co.status);
+                        }
+                        return response_co.json();
+                    })
+                    .then(data_co => {
+                        if (data_co.success) {
+                            logDebug("Przekierowanie do PayU: " + data_co.sessionId);
+                            window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data_co.sessionId);
+                        } else {
+                            throw new Error("Błąd przy tworzeniu płatności: " + (data_co.error || "Nieznany błąd"));
+                        }
+                    })
+                    .catch(error_co => {
+                        logDebug("Błąd podczas przetwarzania: " + error_co.message);
+                        alert("Błąd: " + error_co.message);
                     });
+
                 } else {
                     throw new Error(data.error || "Nieznany błąd zapisu zgłoszenia.");
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    logDebug("Przekierowanie do PayU: " + data.sessionId);
-                    window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data.sessionId);
-                } else {
-                    throw new Error("Błąd przy tworzeniu płatności: " + (data.error || "Nieznany błąd"));
-                }
-            })
-            .catch(error => {
-                logDebug("Błąd podczas przetwarzania: " + error.message);
-                alert("Błąd: " + error.message);
-            });
-        }
-
-        function submitForm_depr(event) {
-            event.preventDefault();
-            if (!validateAge()) {
-                logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
-                return;
-            }
-            
-            const formData = new FormData(document.getElementById("mmaForm"));
-            fetch("save.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                console.log(data.success);
-                console.log(data['success']);
-
-                logDebug("Odpowiedź z serwera: data => " + data);
-                if (data.success) {
-                    window.location.href = "https://secure.payu.com/pay?sessionId=" + data.sessionId;
-                } else {
-                    logDebug("Odpowiedź z serwera: data.success => " + data.success);
-                    // alert("Błąd: " + data.error);
-                }
-                // alert("Odpowiedź serwera: " + data);
-            })
-            .catch(error => {
-                logDebug("Błąd podczas wysyłania danych: " + error);
-                alert("Błąd podczas wysyłania danych.");
-            });
-        }
-*/
-
-
-        function submitForm(event) {
-            event.preventDefault();
-            if (!validateAge()) {
-                logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
-                return;
-            }
-
-            const formData = new FormData(document.getElementById("mmaForm"));
-
-            fetch("save.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => {
-                logDebug("Nagłówek Content-Type: " + response.headers.get("content-type"));
-                if (!response.ok) {
-                    throw new Error("HTTP error! Status: " + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                logDebug("Otrzymana odpowiedź: " + JSON.stringify(data));
-
-                if (typeof data !== "object" || data === null) {
-                    throw new Error("Odpowiedź nie jest poprawnym JSON-em.");
-                }
-
-                if (data.success) {
-                    logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
-
-                    // Tworzenie zamówienia w PayU
-                    return fetch("create_order.php", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ 
-                            name: formData.get("name"),
-                            amount: 10000, // Przykładowa kwota w groszach (100 PLN)
-                            email: "klient@example.com" // Można pobrać z formularza
-                        })
-                    });
-                } else {
-                    throw new Error(data.error || "Nieznany błąd zapisu zgłoszenia.");
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    logDebug("Przekierowanie do PayU: " + data.sessionId);
-                    window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data.sessionId);
-                } else {
-                    throw new Error("Błąd przy tworzeniu płatności: " + (data.error || "Nieznany błąd"));
                 }
             })
             .catch(error => {
