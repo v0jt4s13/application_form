@@ -16,7 +16,11 @@ $newEntry = [
     'category' => $_POST['category'] ?? '',
     'weight' => $_POST['weight'] ?? '',
     'name' => $_POST['name'] ?? '',
+    'surname' => $_POST['surname'] ?? '',
     'age' => $_POST['age'] ?? '',
+    'club' => $_POST['club'] ?? '',
+    'email' => $_POST['email'] ?? '',
+    'phone' => $_POST['phone'] ?? '',
     'sessionId' => $sessionId
 ];
 
