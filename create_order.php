@@ -11,7 +11,7 @@ $continueUrl = 'https://twoja_domena.pl/sukces.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-if (!isset($data["name"], $data["amount"], $data["email"])) {
+if ($posId == 'Twój_POS_ID' || !isset($data["name"], $data["amount"], $data["email"])) {
     echo json_encode(["success" => false, "error" => "Brak wymaganych danych"]);
     exit;
 }
