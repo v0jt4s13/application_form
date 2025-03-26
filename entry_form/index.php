@@ -432,6 +432,7 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                         })
                     })
                     .then(response_co => {
+                        console.log(response_co);
                         logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
                         if (!response_co.ok) {
                             throw new Error("HTTP error! Status: " + response_co.status);
@@ -439,8 +440,9 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                         return response_co.json();
                     })
                     .then(data_co => {
-                        logDebug("Odpowiedź JSON:", data_co);
                         console.log("data =", data_co);
+                        logDebug("Odpowiedź JSON:", data_co);
+                        
                         if (data_co.status === "success") {
                             logDebug("Przekierowanie do PayU: " + data_co.redirect);
                             window.location.href = data_co.redirect;
