@@ -206,27 +206,27 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                 <select id="weight" name="weight"></select>
             </div><div class="form-group">
                 <label for="name">Imię:</label>
-                <input type="text" id="name" name="name" required value="W">
+                <input type="text" id="name" name="name" required>
             </div><div class="form-group">
                 <label for="name">Nazwisko:</label>
-                <input type="text" id="surname" name="surname" required value="W">
+                <input type="text" id="surname" name="surname" required>
             </div><div class="form-group">
                 <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required value="12">
+                <input type="number" id="age" name="age" required>
             </div><div class="form-group">
                 <label for="club">Nazwa klubu:</label>
-                <input type="text" id="club" name="club" list="clubs" value="kubusie">
+                <input type="text" id="club" name="club" list="clubs">
                 <datalist id="clubs">
                     <option value="niezrzeszony">
                 </datalist>
             </div><div class="form-group">
                 <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required value="t@marzec.eu">
+                <input type="email" id="email" name="email" required>
             </div><div class="form-group">
                 <label for="phone">Numer telefonu:</label>
-                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required value="784151737">
+                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required>
             </div>
-            Kwota opłaty: <input type="text" name="amount" value="10000">
+            <input type="hidden" name="amount" value="10000">
             <p id="ageError" class="error"></p>
             <button type="submit">Zgłoś zawodnika</button>
           </div>
