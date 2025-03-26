@@ -78,7 +78,7 @@ nav a {
 }
 
 h1 {
-  color: #e6c01b;
+  color: #cd4545;
   font-size: 3rem;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -116,6 +116,7 @@ a.zgloszenia {
 
 
 .main-wrap {
+  width: 90%;
   max-width: 1200px;
   min-width: 600px;
   margin: auto;
@@ -127,6 +128,7 @@ a.zgloszenia {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 680px) {
@@ -134,6 +136,7 @@ a.zgloszenia {
       font-size: 0.9em;
   }
   .main-wrap, .hero-banner {
+    margin-top: 10px;
       min-width: 300px;
       /* columns: 3 100px; */
       font-size: 0.9em;
@@ -165,7 +168,7 @@ footer {
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
