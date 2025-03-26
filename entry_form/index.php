@@ -1,5 +1,4 @@
 <?php
-file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEND);
   require("../global.php");
 ?>
 <!DOCTYPE html>
@@ -184,7 +183,7 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
         <?php } ?>
       </div>
     </div>
-    <div class="btn-container">
+    <div class="btn-container" style="display: none">
         <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
         <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>
         <button class="btn-style" onclick="changeFontStyle()">Zmień czcionkę</button>
@@ -232,7 +231,7 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
           </div>
         </form>
 
-        <div id="debug">
+        <div id="debug" style="display: none">
             <h3>Debug log:</h3>
             <ul id="debugLog"></ul>
             
@@ -267,6 +266,8 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                 }
             </script>
         </div>
+
+        
     </div>
 
     <?php
