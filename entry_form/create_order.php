@@ -73,7 +73,7 @@ function getAccessToken($client_id, $client_secret, $payu_url) {
 function createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name) {
     
     $order = [
-        "notifyUrl" => "https://www.timeofmasters.pl/entry_form/notify.php",
+        "notifyUrl" => "https://timeofmasters.pl/entry_form/notify.php",
         "customerIp" => $_SERVER['REMOTE_ADDR'],
         "merchantPosId" => $pos_id,
         "description" => "Wpisowe",
