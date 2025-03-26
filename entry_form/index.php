@@ -1,4 +1,5 @@
 <?php
+file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEND);
   require("../global.php");
 ?>
 <!DOCTYPE html>
@@ -205,27 +206,27 @@
                 <select id="weight" name="weight"></select>
             </div><div class="form-group">
                 <label for="name">Imię:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required value="W">
             </div><div class="form-group">
                 <label for="name">Nazwisko:</label>
-                <input type="text" id="surname" name="surname" required>
+                <input type="text" id="surname" name="surname" required value="W">
             </div><div class="form-group">
                 <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required>
+                <input type="number" id="age" name="age" required value="12">
             </div><div class="form-group">
                 <label for="club">Nazwa klubu:</label>
-                <input type="text" id="club" name="club" list="clubs">
+                <input type="text" id="club" name="club" list="clubs" value="kubusie">
                 <datalist id="clubs">
                     <option value="niezrzeszony">
                 </datalist>
             </div><div class="form-group">
                 <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required value="t@marzec.eu">
             </div><div class="form-group">
                 <label for="phone">Numer telefonu:</label>
-                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required>
+                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required value="784151737">
             </div>
-
+            Kwota opłaty: <input type="text" name="amount" value="10000">
             <p id="ageError" class="error"></p>
             <button type="submit">Zgłoś zawodnika</button>
           </div>
@@ -418,25 +419,15 @@
 
                 if (data.success) {
                     logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
+                    logDebug("name: "+formData.get("name")+" amount: "+formData.get("amount")+" email: "+formData.get("email"));
 
-                    // Tworzenie zamówienia w PayU
-                    // return fetch("create_order.php", {
-                    //     method: "POST",
-                    //     headers: { "Content-Type": "application/json" },
-                    //     body: JSON.stringify({ 
-                    //         name: formData.get("name"),
-                    //         amount: <?php echo $ammount_to_pay; ?>, // Przykładowa kwota w groszach (100 PLN)
-                    //         email: formData.get("email")
-                    //     })
-                    // });
-
-
-                    fetch("../create_order.php", {
+                    fetch("create_order.php", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ 
+                        body: JSON.stringify({
+                            sessionId: data.sessionId,
                             name: formData.get("name"),
-                            amount: <?php echo $ammount_to_pay; ?>, // Przykładowa kwota w groszach (100 PLN)
+                            amount: formData.get("amount"), // Przykładowa kwota w groszach (100 PLN)
                             email: formData.get("email")
                         })
                     })
@@ -448,17 +439,51 @@
                         return response_co.json();
                     })
                     .then(data_co => {
-                        if (data_co.success) {
-                            logDebug("Przekierowanie do PayU: " + data_co.sessionId);
-                            window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data_co.sessionId);
+                        logDebug("Odpowiedź JSON:", data_co);
+                        console.log("data =", data_co);
+                        if (data_co.status === "success") {
+                            logDebug("Przekierowanie do PayU: " + data_co.redirect);
+                            window.location.href = data_co.redirect;
                         } else {
-                            throw new Error("Błąd przy tworzeniu płatności: " + (data_co.error || "Nieznany błąd"));
+                            throw new Error("Błąd przy tworzeniu płatności: " + (data_co.message || "Nieznany błąd"));
                         }
                     })
                     .catch(error_co => {
                         logDebug("Błąd podczas przetwarzania: " + error_co.message);
                         alert("Błąd: " + error_co.message);
                     });
+
+                    // fetch("create_order.php", {
+                    //     method: "POST",
+                    //     headers: { "Content-Type": "application/json" },
+                    //     body: JSON.stringify({ 
+                    //         name: formData.get("name"),
+                    //         amount: formData.get("amount"), // Przykładowa kwota w groszach (100 PLN)
+                    //         email: formData.get("email")
+                    //     })
+                    // })
+                    // .then(response_co => {
+                    //     logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
+                    //     if (!response_co.ok) {
+                    //         throw new Error("HTTP error! Status: " + response_co.status);
+                    //     }
+                    //     return response_co.json();
+                    // })
+                    // .then(data_co => {
+                    //     logDebug("Odpowiedź JSON:", data_co);
+                    //     console.log("data =", data_co);
+                    //     if (data_co.success) {
+                    //         logDebug("Przekierowanie do PayU: " + data_co.sessionId);
+                    //         window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data_co.sessionId);
+                    //     } else {
+                    //         throw new Error("Błąd przy tworzeniu płatności: " + (data_co.error || "Nieznany błąd"));
+                    //     }
+                    // })
+                    // .catch(error_co => {
+                    //     logDebug("Błąd podczas przetwarzania: " + error_co.message);
+                    //     alert("Błąd: " + error_co.message);
+                    // });
+
 
                 } else {
                     throw new Error(data.error || "Nieznany błąd zapisu zgłoszenia.");
