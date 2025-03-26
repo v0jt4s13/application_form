@@ -13,8 +13,7 @@ if (!function_exists('curl_init')) {
 require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
-// header('Content-Type: application/json');
-header('Content-Type: text/plain');
+header('Content-Type: application/json');
 
 // Ładowanie .env
 $dotenv = Dotenv::createImmutable(__DIR__);
