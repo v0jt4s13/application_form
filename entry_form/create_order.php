@@ -1,7 +1,12 @@
 <?php
 // Włącz błędy
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);      // nie pokazuj błędów użytkownikowi
+ini_set('display_startup_errors', 0);
+// error_reporting(E_ALL);            // loguj wszystko (do pliku, nie do outputu)
+error_reporting(0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php_errors.log');
+
 file_put_contents(__DIR__ . "/debug_post.log", "\ncreate_order.php działa\n", FILE_APPEND);
 if (!function_exists('curl_init')) {
     file_put_contents(__DIR__ . "/debug_post.log", "\ncreate_order.php Brak curl_init()\n", FILE_APPEND);
@@ -13,6 +18,7 @@ if (!function_exists('curl_init')) {
 require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
+ob_clean();
 header('Content-Type: application/json');
 
 // Ładowanie .env
@@ -67,10 +73,10 @@ function getAccessToken($client_id, $client_secret, $payu_url) {
 function createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name) {
     
     $order = [
-        "notifyUrl" => "https://twojadomena.pl/notify.php",
+        "notifyUrl" => "https://timeofmasters.pl/entry_form/notify.php",
         "customerIp" => $_SERVER['REMOTE_ADDR'],
         "merchantPosId" => $pos_id,
-        "description" => "Płatność testowa",
+        "description" => "Wpisowe",
         "currencyCode" => "PLN",
         "totalAmount" => strval($amount),
         "extOrderId" => $sessionId,
@@ -82,7 +88,7 @@ function createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name) 
         ],
         "products" => [
             [
-                "name" => "Produkt testowy",
+                "name" => "Wpisowe na zawody",
                 "unitPrice" => strval($amount),
                 "quantity" => "1"
             ]

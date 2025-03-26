@@ -421,6 +421,8 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                     logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
                     logDebug("name: "+formData.get("name")+" amount: "+formData.get("amount")+" email: "+formData.get("email"));
 
+
+                    
                     fetch("create_order.php", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -432,7 +434,10 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                         })
                     })
                     .then(response_co => {
+                        console.log('response_co');
                         console.log(response_co);
+                        console.log('response_co.ok', response_co.ok);
+                        
                         logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
                         if (!response_co.ok) {
                             throw new Error("HTTP error! Status: " + response_co.status);
