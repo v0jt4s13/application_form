@@ -1,1 +1,25 @@
 entry_form/form_response_data/*
+
+# Pliki Composera
+/vendor/
+entry_form/vendor
+
+# Konfiguracje środowiska
+.env
+.env.local
+entry_form/.env
+
+# Logi
+*.log
+debug_post.log
+notify_raw.log
+entry_form/debug_post.log
+
+# Backupy i pliki tymczasowe
+*.bak
+*.swp
+*.tmp
+
+# Mac-specific / systemowe
+.DS_Store
+Thumbs.db
