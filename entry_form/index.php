@@ -421,55 +421,56 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                     logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
                     logDebug("name: "+formData.get("name")+" amount: "+formData.get("amount")+" email: "+formData.get("email"));
 
+fetch("create_order.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        sessionId: data.sessionId,
+        name: formData.get("name"),
+        amount: formData.get("amount"),
+        email: formData.get("email")
+    })
+})
+.then(response_co => {
+    console.log("Nagłówki:", response_co.headers.get("content-type"));
+    return response_co.text(); // pobierz jako tekst
+})
+.then(text => {
+    console.log("Surowa odpowiedź:", text);
+    try {
+        let data_co = JSON.parse(text);
+        console.log("data =", data_co);
+        if (data_co.status === "success") {
+            window.location.href = data_co.redirect;
+        } else {
+            throw new Error("Błąd przy tworzeniu płatności: " + (data_co.message || "Nieznany błąd"));
+        }
+    } catch (e) {
+        throw new Error("Błąd parsowania JSON: " + e.message);
+    }
+})
+.catch(error_co => {
+    console.error("Błąd podczas przetwarzania:", error_co.message);
+    logDebug("Błąd podczas przetwarzania: " + error_co.message);
+    alert("Błąd: " + error_co.message);
+});
 
-                    
-                    fetch("create_order.php", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            sessionId: data.sessionId,
-                            name: formData.get("name"),
-                            amount: formData.get("amount"), // Przykładowa kwota w groszach (100 PLN)
-                            email: formData.get("email")
-                        })
-                    })
-                    .then(response_co => {
-                        console.log('response_co');
-                        console.log(response_co);
-                        console.log('response_co.ok', response_co.ok);
-                        
-                        logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
-                        if (!response_co.ok) {
-                            throw new Error("HTTP error! Status: " + response_co.status);
-                        }
-                        return response_co.json();
-                    })
-                    .then(data_co => {
-                        console.log("data =", data_co);
-                        logDebug("Odpowiedź JSON:", data_co);
-                        
-                        if (data_co.status === "success") {
-                            logDebug("Przekierowanie do PayU: " + data_co.redirect);
-                            window.location.href = data_co.redirect;
-                        } else {
-                            throw new Error("Błąd przy tworzeniu płatności: " + (data_co.message || "Nieznany błąd"));
-                        }
-                    })
-                    .catch(error_co => {
-                        logDebug("Błąd podczas przetwarzania: " + error_co.message);
-                        alert("Błąd: " + error_co.message);
-                    });
 
                     // fetch("create_order.php", {
                     //     method: "POST",
                     //     headers: { "Content-Type": "application/json" },
-                    //     body: JSON.stringify({ 
+                    //     body: JSON.stringify({
+                    //         sessionId: data.sessionId,
                     //         name: formData.get("name"),
                     //         amount: formData.get("amount"), // Przykładowa kwota w groszach (100 PLN)
                     //         email: formData.get("email")
                     //     })
                     // })
                     // .then(response_co => {
+                    //     console.log('response_co');
+                    //     console.log(response_co);
+                    //     console.log('response_co.ok', response_co.ok);
+                        
                     //     logDebug("create_order.php -> Nagłówek Content-Type: " + response_co.headers.get("content-type"));
                     //     if (!response_co.ok) {
                     //         throw new Error("HTTP error! Status: " + response_co.status);
@@ -477,13 +478,14 @@ file_put_contents(__DIR__ . "/debug_post.log", "index.php działa\n", FILE_APPEN
                     //     return response_co.json();
                     // })
                     // .then(data_co => {
-                    //     logDebug("Odpowiedź JSON:", data_co);
                     //     console.log("data =", data_co);
-                    //     if (data_co.success) {
-                    //         logDebug("Przekierowanie do PayU: " + data_co.sessionId);
-                    //         window.location.href = "https://secure.payu.com/pay?sessionId=" + encodeURIComponent(data_co.sessionId);
+                    //     logDebug("Odpowiedź JSON:", data_co);
+                        
+                    //     if (data_co.status === "success") {
+                    //         logDebug("Przekierowanie do PayU: " + data_co.redirect);
+                    //         window.location.href = data_co.redirect;
                     //     } else {
-                    //         throw new Error("Błąd przy tworzeniu płatności: " + (data_co.error || "Nieznany błąd"));
+                    //         throw new Error("Błąd przy tworzeniu płatności: " + (data_co.message || "Nieznany błąd"));
                     //     }
                     // })
                     // .catch(error_co => {
