@@ -23,3 +23,7 @@ entry_form/debug_post.log
 # Mac-specific / systemowe
 .DS_Store
 Thumbs.db
+
+# Ignoruj wszystkie ukryte pliki globalnie (np. .env, .htaccess, .vscode/settings.json)
+**/.*
+!**/.gitignore
