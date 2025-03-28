@@ -156,27 +156,27 @@
                 <select id="weight" name="weight"></select>
             </div><div class="form-group">
                 <label for="name">Imię:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" value="www" required>
             </div><div class="form-group">
                 <label for="name">Nazwisko:</label>
-                <input type="text" id="surname" name="surname" required>
+                <input type="text" id="surname" name="surname" value="mmm" required>
             </div><div class="form-group">
                 <label for="age">Wiek:</label>
-                <input type="number" id="age" name="age" required>
+                <input type="number" id="age" name="age" value="13" required>
             </div><div class="form-group">
                 <label for="club">Nazwa klubu:</label>
-                <input type="text" id="club" name="club" list="clubs">
+                <input type="text" id="club" name="club" list="clubs" value="klubname">
                 <datalist id="clubs">
                     <option value="niezrzeszony">
                 </datalist>
             </div><div class="form-group">
                 <label for="email">Adres e-mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="www@mmm.pl" required>
             </div><div class="form-group">
                 <label for="phone">Numer telefonu:</label>
-                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" required>
+                <input type="tel" id="phone" name="phone" placeholder="np. 501234567" value="123789456" required>
             </div>
-            <input type="hidden" name="amount" value="10000">
+            <input type="hidden" name="amount" value="12000">
             <p id="ageError" class="error"></p>
             <button type="submit">Zgłoś zawodnika</button>
           </div>
@@ -342,12 +342,14 @@
                     logDebug("Zapisano zgłoszenie, przygotowanie do płatności...");
                     logDebug("name: "+formData.get("name")+" amount: "+formData.get("amount")+" email: "+formData.get("email"));
 
+
 fetch("create_order.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         sessionId: data.sessionId,
         name: formData.get("name"),
+        surname: formData.get("surname"),
         amount: formData.get("amount"),
         email: formData.get("email")
     })

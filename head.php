@@ -14,10 +14,11 @@
     <script src="<?php echo $global_domain; ?>/static/js/scripts.js" defer></script>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ1E0T3P31"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KB6CGMFX8Y"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-CZ1E0T3P31');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KB6CGMFX8Y');
     </script>

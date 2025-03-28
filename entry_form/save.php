@@ -1,8 +1,16 @@
 <?php
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(403);
+    exit('Nieautoryzowany dostęp');
+}
+
+require("../global.php");
+
 header('Content-Type: application/json'); // Ustawienie poprawnego nagłówka JSON
 
-$dataFolder = 'form_response_data';
-$dataFile = $dataFolder . '/zgloszenia.json';
+// $dataFolder = 'form_response_data'; przeniesione do global.php
+$dataFile = $dataFolder . "/zgloszenia.json";
 
 // Upewnij się, że folder istnieje
 if (!file_exists($dataFolder)) {
@@ -10,6 +18,7 @@ if (!file_exists($dataFolder)) {
 }
 // Generowanie unikalnego identyfikatora sesji
 $sessionId = bin2hex(random_bytes(16));
+$date = date('Y-m-d H:i:s');
 // Odbiór danych z formularza
 $newEntry = [
     'formula' => $_POST['formula'] ?? '',
@@ -21,7 +30,8 @@ $newEntry = [
     'club' => $_POST['club'] ?? '',
     'email' => $_POST['email'] ?? '',
     'phone' => $_POST['phone'] ?? '',
-    'sessionId' => $sessionId
+    'sessionId' => $sessionId,
+    'sysdate' => $date
 ];
 
 // Odczyt istniejących danych

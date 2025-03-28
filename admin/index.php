@@ -118,31 +118,31 @@
           </div><div class="filter-form row2">
             <div class="form-group">
                 <label for="category">Kategoria:</label>
-                <input type="text" name="category" value="<?= htmlspecialchars($categoryFilter) ?>">
+                <input type="text" name="category" value="">
             </div>
             <div class="form-group number">
                 <label for="ageMin">Wiek od:</label>
-                <input type="text" name="ageMin" value="<?= htmlspecialchars($ageMin) ?>">
+                <input type="text" name="ageMin" value="">
                 <label for="ageMax">Wiek do:</label>
-                <input type="text" name="ageMax" value="<?= htmlspecialchars($ageMax) ?>">
+                <input type="text" name="ageMax" value="">
             </div>
             <div class="form-group number">
                 <label for="weightMin">Waga od:</label>
-                <input type="text" name="weightMin" value="<?= htmlspecialchars($weightMin) ?>">
+                <input type="text" name="weightMin" value="">
                 <label for="weightMax">Waga do:</label>
-                <input type="text" name="weightMax" value="<?= htmlspecialchars($weightMax) ?>">
+                <input type="text" name="weightMax" value="">
             </div>
             <!-- <div class="form-group">
                 <label for="ageMin">Wiek od:</label>
-                <input type="number" step="1" min="12" max="99" name="ageMin" value="<?= htmlspecialchars($ageMin) ?>">
+                <input type="number" step="1" min="12" max="99" name="ageMin" value="">
                 <label for="ageMax">Wiek do:</label>
-                <input type="number" step="1" min="12" max="99" name="ageMax" value="<?= htmlspecialchars($ageMax) ?>">
+                <input type="number" step="1" min="12" max="99" name="ageMax" value="">
             </div>
             <div class="form-group">
                 <label for="weightMin">Waga od:</label>
-                <input type="number" step="0.1" name="weightMin" value="<?= htmlspecialchars($weightMin) ?>">
+                <input type="number" step="0.1" name="weightMin" value="">
                 <label for="weightMax">Waga do:</label>
-                <input type="number" step="0.1" name="weightMax" value="<?= htmlspecialchars($weightMax) ?>">
+                <input type="number" step="0.1" name="weightMax" value="">
             </div> -->
           </div>
             <?php
@@ -163,6 +163,7 @@
                 <th>Klub</th>
                 <th>Email</th>
                 <th>Telefon</th>
+                <th>Data zgłoszenia</th>
             </tr>
         </thead>
         <tbody>
@@ -227,6 +228,7 @@
                     <td>${entry.club}</td>
                     <td>${entry.email}</td>
                     <td>${entry.phone}</td>
+                    <td>${entry.sysdate}</td>
                 `;
                 tableBody.appendChild(row);
             });

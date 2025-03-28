@@ -17,6 +17,7 @@ if (!function_exists('curl_init')) {
 
 require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
+require("../global.php");
 
 ob_clean();
 header('Content-Type: application/json');
@@ -36,10 +37,21 @@ $input = json_decode(file_get_contents("php://input"), true);
 file_put_contents(__DIR__ . "/debug_post.log", "\n[Input] " . json_encode($input) . "\n", FILE_APPEND);
 file_put_contents(__DIR__ . "/debug_post.log", "\n[Konfiguracja] client_id=$client_id, client_secret=$client_secret, pos_id=$pos_id\n", FILE_APPEND);
 
-$name = $input['name'] ?? 'Unknown';
-$email = $input['email'] ?? 'noemail@example.com';
-$amount = $input['amount'] ?? 10000;
+$name = $input['name'] ?? '';
+$surname = $input['surname'] ?? '';
+$email = $input['email'] ?? '';
+$amount = $input['amount'] ?? 0;
 $sessionId = $input['sessionId'] ?? uniqid("sess_", true); // fallback awaryjny
+
+
+if ($name === "" || $surname === "" || $email === "") {
+    echo json_encode(["status" => "error", "message" => "Brak podstawowych danych użytkownika (imie, nazwisko, email)"]);
+    exit;
+}
+if ($amount != $ammount_to_pay) {
+    echo json_encode(["status" => "error", "message" => "Kwota z formularza nie zgadza sie z kwotą ustaloną."]);
+    exit;
+}
 
 // Token
 function getAccessToken($client_id, $client_secret, $payu_url) {
@@ -68,27 +80,26 @@ function getAccessToken($client_id, $client_secret, $payu_url) {
     return $response['access_token'] ?? null;
 }
 
-
 // Zamówienie
-function createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name) {
+function createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name, $surname) {
     
     $order = [
-        "notifyUrl" => "https://timeofmasters.pl/entry_form/notify.php",
+        "notifyUrl" => $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/entry_form/notify.php",
         "customerIp" => $_SERVER['REMOTE_ADDR'],
         "merchantPosId" => $pos_id,
-        "description" => "Wpisowe",
+        "description" => "Mistrzostwa amatorskiego MMA Bojano, 10.05.2025",
         "currencyCode" => "PLN",
         "totalAmount" => strval($amount),
         "extOrderId" => $sessionId,
         "buyer" => [
-            "email" => $email,
-            "firstName" => $name,
-            "lastName" => "",
+            "email" => "$email",
+            "firstName" => "$name",
+            "lastName" => "$surname",
             "language" => "pl"
         ],
         "products" => [
             [
-                "name" => "Wpisowe na zawody",
+                "name" => "Wpisowe na zawody - 10.05.2025",
                 "unitPrice" => strval($amount),
                 "quantity" => "1"
             ]
@@ -124,7 +135,7 @@ if (!$access_token) {
 }
 file_put_contents(__DIR__ . "/debug_post.log", "\ncreate_order.php access_token=$access_token", FILE_APPEND);
 
-$order_response = createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name);
+$order_response = createOrder($access_token, $payu_url, $pos_id, $amount, $email, $name, $surname);
 
 file_put_contents(__DIR__ . "/debug_post.log", "\ncreate_order.php order_response=" . json_encode($order_response, JSON_PRETTY_PRINT), FILE_APPEND);
 
