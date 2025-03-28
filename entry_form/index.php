@@ -1,64 +1,20 @@
 <?php
   require("../global.php");
+  require("../head.php");
 ?>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time Of Masters</title>
-  <link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/style.css">
-  <script src="<?php echo $global_domain; ?>/static/js/script.js" defer></script>
-
+</head>  
   <style>
         body {
             transition: background 0.5s ease-in-out, color 0.5s ease-in-out, font-family 0.5s ease-in-out;
             font-size: 18px;
             text-align: center;
         }
-        .btn-container {
-            position: fixed;
-            top: 120px;
-            left: -10px;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            width: 100%;
-            z-index: 111;
-            justify-content: flex-end;
-        }
-        .btn-style {
-            padding: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            width: min-content;
-            text-align: center;
-        }
-        .btn-style:hover {
-            background: rgba(0, 0, 0, 1);
-        }
-
-
-
         h2.title {
             text-align: center;
         }
         h2 {
             text-align: center;
         }
-        /* form {
-            min-height: 250px;
-            flex-wrap: wrap;
-            flex-direction: column;
-            padding: 20px;
-            background: whitesmoke;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        } */
         .form-group {
             display: flex;
             align-items: center;
@@ -169,7 +125,7 @@
 </head>
 <body>
   <?php
-    require("../header.php");
+    require("../menu-nav.php");
   ?>
     <div class="hero" style="background-image: url('<?php echo $global_domain; ?>/static/img/thewinneris.png');">
       <div class="hero-content">
@@ -182,11 +138,6 @@
             <p></p>
         <?php } ?>
       </div>
-    </div>
-    <div class="btn-container" style="display: none">
-        <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
-        <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>
-        <button class="btn-style" onclick="changeFontStyle()">Zmień czcionkę</button>
     </div>
 
     <div class="main-wrap">
@@ -234,37 +185,6 @@
         <div id="debug" style="display: none">
             <h3>Debug log:</h3>
             <ul id="debugLog"></ul>
-            
-            <script>
-                const backgrounds = [
-                    "background-color: #f9f470;",
-                    "background: repeating-radial-gradient(#44491a, #0d3110 130px);",
-                    "background: linear-gradient(179deg, #44491a, #0d3110);",
-                    "background: linear-gradient(268deg, #0c2103, transparent 620px);"
-                ];
-
-                const fontColors = ["#ff5733", "#33ff57", "#3357ff", "#f1c40f", "#8e44ad"];
-                const fontStyles = ["Arial, sans-serif", "Courier New, monospace", "Georgia, serif", "Times New Roman, serif", "Verdana, sans-serif"];
-
-                let bgIndex = 0;
-                let colorIndex = 0;
-                let fontIndex = 0;
-
-                function changeBackground() {
-                    document.body.style = backgrounds[bgIndex];
-                    bgIndex = (bgIndex + 1) % backgrounds.length;
-                }
-
-                function changeFontColor() {
-                    document.body.style.color = fontColors[colorIndex];
-                    colorIndex = (colorIndex + 1) % fontColors.length;
-                }
-
-                function changeFontStyle() {
-                    document.body.style.fontFamily = fontStyles[fontIndex];
-                    fontIndex = (fontIndex + 1) % fontStyles.length;
-                }
-            </script>
         </div>
 
         

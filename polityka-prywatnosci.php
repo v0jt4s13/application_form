@@ -1,22 +1,11 @@
 <?php
   require("global.php");
+  require("head.php");
 ?>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time Of Masters</title>
-  <link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/style.css">
-  <script src="<?php echo $global_domain; ?>/static/js/script.js" defer></script>
-
-  <style>
-
-  </style>
 </head>
 <body>
   <?php
-    require("header.php");
+    require("menu-nav.php");
   ?>
   <div class="hero" style="background-image: url('<?php echo $global_domain; ?>/static/img/thewinneris.png');">
     <div class="hero-content">

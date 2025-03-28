@@ -1,15 +1,11 @@
 <?php
   require("../global.php");
+  $page_title = "Lista startowa";
+  require("../head.php");
 ?>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista startowa</title>
-    <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/global.css">
-    <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/style.css">
-    <style>
+  <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/global.css">
+    
+  <style>
     button#toggleMMA, 
     button#toggleK1 {
         font-size: 1.7em;
@@ -65,141 +61,43 @@
         transition: background-color 0.3s ease;
     }
 
-    </style>
-    <style>
-        /* 
-        .hero-banner {
-            display: grid;
-            min-width: 640px;
-        }
-        .hero-bg-img {
+    .filter-form.row1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    label {
+        font-size: 1.7em;
+        padding: 0px 7px;
+    }
+    .filter-form.row2 input[type="text"] {
+        width: 4em;
+    }
+    .filter-form.row2 .form-group.number input {
+        width: 2em;
+    }
+    .filter-form.row2 input {
+        height: 2em;
+        font-size: 1.7em;
+        padding: 0px 7px;
+        justify-items: center;
+        text-transform: uppercase;
+    }
+    .filter-form.row2 {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 7px;
+        background: antiquewhite;
+    }
+  </style>
 
-        }
-        img {
-            width: 100%;
-            height: auto;
-        }
-        h2.title {
-            text-align: center;
-        }
-        form.formula {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-content: flex-start;
-            justify-content: space-between;
-            align-items: flex-start;
-        }        
-
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px;
-            background-color: #121212;
-            color: white;
-        }
-        .main-wrap {
-            min-width: 600px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        @media screen and (max-width: 680px) {
-            body {
-                font-size: 0.9em;
-            }
-            .main-wrap, .hero-banner {
-                min-width: 400px;
-                columns: 3 100px;
-                font-size: 0.9em;
-            }
-        }
-
-
-        h2 {
-            text-align: center;
-        }
-        .button-toggle {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            background: #333;
-            color: white;
-            border: 2px solid white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        .button-toggle.active {
-            background: white;
-            color: black;
-            border: 2px solid black;
-        }
-        form {
-            display: flex;
-            flex-direction: row;
-            min-height: 250px;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-        .form-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            margin-left: 20px;
-        }
-        .form-group label {
-            flex: 1;
-            padding-right: 10px;
-            max-width: 90px;
-        }
-        .form-group input,
-        .form-group select {
-            flex: 2;
-            padding: 8px;
-            border-radius: 4px;
-            border: none;
-            font-size: 16px;
-            background: #2c2c2c;
-            color: white;
-            max-width: 50px;
-        }
-        button {
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        #debug {
-            background: #f4f4f4;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-            color: black;
-        }
-        .error {
-            color: red;
-        } */
-    </style>
 </head>
 <body class="dark">
+<?php
+    require("../menu-nav.php");
+?>
     <div class="hero-banner">
         <div class="hero-bg-img">
             <img src="<?php echo $global_domain; ?>/static/img/tlofbmma.png">
@@ -209,6 +107,7 @@
         <h2 class="title">Lista startowa</h2>
 
         <form id="filterForm" method="GET">
+          <div class="filter-form row1">
             <div class="form-group">
                 <div class="formula-button">
                     <button type="button" class="button-toggle" id="toggleMMA">MMA</button>
@@ -216,37 +115,38 @@
                 </div>
                 <input type="hidden" id="formula" name="formula" value="">
             </div>
-            <?php
-            /* <label for="formula">Formuła:</label>
-            <div>
-                <button type="button" class="button-toggle" id="toggleMMA">MMA</button>
-                <button type="button" class="button-toggle" id="toggleK1">K1</button>
-            </div>
-            <input type="hidden" name="formula[]" value="MMA" <?= in_array("MMA", $formulaFilters) ? 'checked' : '' ?>> MMA
-            <input type="hidden" name="formula[]" value="K1" <?= in_array("K1", $formulaFilters) ? 'checked' : '' ?>> K1 -->
-            
-            
+          </div><div class="filter-form row2">
             <div class="form-group">
                 <label for="category">Kategoria:</label>
                 <input type="text" name="category" value="<?= htmlspecialchars($categoryFilter) ?>">
             </div>
-            <div class="form-group">
+            <div class="form-group number">
+                <label for="ageMin">Wiek od:</label>
+                <input type="text" name="ageMin" value="<?= htmlspecialchars($ageMin) ?>">
+                <label for="ageMax">Wiek do:</label>
+                <input type="text" name="ageMax" value="<?= htmlspecialchars($ageMax) ?>">
+            </div>
+            <div class="form-group number">
+                <label for="weightMin">Waga od:</label>
+                <input type="text" name="weightMin" value="<?= htmlspecialchars($weightMin) ?>">
+                <label for="weightMax">Waga do:</label>
+                <input type="text" name="weightMax" value="<?= htmlspecialchars($weightMax) ?>">
+            </div>
+            <!-- <div class="form-group">
                 <label for="ageMin">Wiek od:</label>
                 <input type="number" step="1" min="12" max="99" name="ageMin" value="<?= htmlspecialchars($ageMin) ?>">
-            </div>
-            <div class="form-group">
                 <label for="ageMax">Wiek do:</label>
                 <input type="number" step="1" min="12" max="99" name="ageMax" value="<?= htmlspecialchars($ageMax) ?>">
             </div>
             <div class="form-group">
                 <label for="weightMin">Waga od:</label>
                 <input type="number" step="0.1" name="weightMin" value="<?= htmlspecialchars($weightMin) ?>">
-            </div>
-            <div class="form-group">
                 <label for="weightMax">Waga do:</label>
                 <input type="number" step="0.1" name="weightMax" value="<?= htmlspecialchars($weightMax) ?>">
-            </div>
-            */
+            </div> -->
+          </div>
+            <?php
+            /**/
             ?>
         </form>
 
@@ -276,6 +176,7 @@
             if (!formData.get("formula")) {
                 formData.delete("formula");
             }
+            console.log('formData');
             console.log(formData);
             fetch("lista_startowa.json.php", {
                 method: "POST",

@@ -42,7 +42,7 @@ Ten projekt to dynamiczny formularz zgłoszeniowy dla zawodników MMA, umożliwi
 │── index.html          # Formularz zgłoszeniowy
 │── save.php            # Obsługa zgłoszeń po stronie serwera
 │── styles.css          # Stylizacja strony
-│── script.js           # Obsługa dynamicznych funkcji formularza
+│── scripts.js           # Obsługa dynamicznych funkcji formularza
 │── README.md           # Dokumentacja projektu
 ```
 
