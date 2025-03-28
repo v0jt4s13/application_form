@@ -1,0 +1,25 @@
+.btn-container {
+    position: fixed;
+    top: 120px;
+    left: -10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    z-index: 111;
+    justify-content: flex-end;
+}
+.btn-style {
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: min-content;
+    text-align: center;
+}
+.btn-style:hover {
+    background: rgba(0, 0, 0, 1);
+}

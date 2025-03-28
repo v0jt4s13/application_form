@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $weightMin = $_POST['weightMin'] ?? '';
     $weightMax = $_POST['weightMax'] ?? '';
 
+    // echo json_encode(["success" => true, "message" => "ageMin=$ageMin; ageMax=$ageMax; weightMin=$weightMin; weightMax=$weightMax"]);
+    // exit;
+
     if (!is_array($formulaFilters)) {
         $formulaFilters = [$formulaFilters];
     }

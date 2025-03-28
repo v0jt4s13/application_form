@@ -8,3 +8,12 @@
       document.querySelector("nav ul").classList.toggle("active");
   }
 </script>
+
+
+<div class="btn-container" style="display: none">
+    <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
+    <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>
+    <button class="btn-style" onclick="changeFontStyle()">Zmień czcionkę</button>
+</div>
+<link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/dev-styles.css">
+  <script src="<?php echo $global_domain; ?>/static/js/dev-scripts.js" defer></script>
