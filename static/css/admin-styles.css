@@ -1,0 +1,121 @@
+
+button#toggleMMA, 
+button#toggleK1 {
+  font-size: 1.7em;
+  padding: 7px;
+}
+.formula-button {
+  padding: 7px;
+  margin: 0px 10px 10px 10px;
+}
+.button-toggle.active {
+  background: white;
+  color: black;
+  border: 2px solid black;
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+  text-decoration: underline;
+}
+.filter-form.row1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+label {
+  font-size: 1.7em;
+  padding: 0px 7px;
+}
+.filter-form.row2 input[type="text"] {
+  width: 4em;
+}
+.filter-form.row2 .form-group.number input {
+  width: 2em;
+}
+.filter-form.row2 input {
+  height: 2em;
+  font-size: 1.7em;
+  padding: 0px 7px;
+  justify-items: center;
+  text-transform: uppercase;
+}
+.filter-form.row2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 7px;
+  background: antiquewhite;
+  border-radius: 10px;
+}
+
+#resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+#resultsTable th,
+#resultsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+#resultsTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+#resultsTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+#resultsTable tbody tr:hover {
+    background-color: #e1d1d1;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  #resultsTable thead {
+    display: none; /* Ukryj nagłówki na małych ekranach */
+  }
+
+  #resultsTable tr {
+    display: block;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  #resultsTable td {
+    display: block;
+    text-align: right;
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  #resultsTable td:before {
+    position: absolute;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label); /* Użyj atrybutu data-label */
+    text-align: left;
+    font-weight: bold;
+  }
+
+  /* Dodaj atrybuty data-label do komórek */
+  #resultsTable td:nth-of-type(1):before { content: "#"; }
+  #resultsTable td:nth-of-type(2):before { content: "Imię"; }
+  #resultsTable td:nth-of-type(3):before { content: "Nazwisko"; }
+  #resultsTable td:nth-of-type(4):before { content: "Formuła"; }
+  #resultsTable td:nth-of-type(5):before { content: "Kategoria"; }
+  #resultsTable td:nth-of-type(6):before { content: "Waga"; }
+  #resultsTable td:nth-of-type(7):before { content: "Wiek"; }
+  #resultsTable td:nth-of-type(8):before { content: "Klub"; }
+  #resultsTable td:nth-of-type(9):before { content: "Email"; }
+  #resultsTable td:nth-of-type(10):before { content: "Telefon"; }
+  #resultsTable td:nth-of-type(11):before { content: "IP uzytkownika"; }
+  #resultsTable td:nth-of-type(12):before { content: "Data zgłoszenia"; }
+}

@@ -3,96 +3,8 @@
   $page_title = "Lista startowa";
   require("../head.php");
 ?>
-  <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/global.css">
+  <link async rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/admin-styles.css">
     
-  <style>
-    button#toggleMMA, 
-    button#toggleK1 {
-        font-size: 1.7em;
-        padding: 7px;
-    }
-    .formula-button {
-        /* background: aqua; */
-        padding: 7px;
-        margin: 0px 10px 10px 10px;
-    }
-    .button-toggle.active {
-        background: white;
-        color: black;
-        border: 2px solid black;
-        box-shadow: 0 0 10px rgba(255,255,255,0.6);
-        text-decoration: underline;
-    }
-    #resultsTable {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        font-size: 16px;
-        background-color: #e0dede;
-        color: #333333;
-        border: 1px solid #333;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-
-    #resultsTable thead {
-        background-color: #007bff;
-        color: #ffffff;
-        font-weight: bold;
-    }
-
-    #resultsTable th,
-    #resultsTable td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #333;
-    }
-
-    #resultsTable tbody tr:nth-child(even) {
-        background-color: #e0dede;
-    }
-
-    #resultsTable tbody tr:nth-child(odd) {
-        background-color: #d2d7e5;
-    }
-
-    #resultsTable tbody tr:hover {
-        background-color: #e1d1d1;
-        transition: background-color 0.3s ease;
-    }
-
-    .filter-form.row1 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    label {
-        font-size: 1.7em;
-        padding: 0px 7px;
-    }
-    .filter-form.row2 input[type="text"] {
-        width: 4em;
-    }
-    .filter-form.row2 .form-group.number input {
-        width: 2em;
-    }
-    .filter-form.row2 input {
-        height: 2em;
-        font-size: 1.7em;
-        padding: 0px 7px;
-        justify-items: center;
-        text-transform: uppercase;
-    }
-    .filter-form.row2 {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        flex-direction: row;
-        padding: 7px;
-        background: antiquewhite;
-    }
-  </style>
-
 </head>
 <body class="dark">
 <?php
@@ -163,6 +75,7 @@
                 <th>Klub</th>
                 <th>Email</th>
                 <th>Telefon</th>
+                <th>IP użytkownika</th>
                 <th>Data zgłoszenia</th>
             </tr>
         </thead>
@@ -218,17 +131,18 @@
             data.forEach((entry, index) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${entry.name}</td>
-                    <td>${entry.surname}</td>
-                    <td>${entry.formula}</td>
-                    <td>${entry.category}</td>
-                    <td>${entry.weight}</td>
-                    <td>${entry.age}</td>
-                    <td>${entry.club}</td>
-                    <td>${entry.email}</td>
-                    <td>${entry.phone}</td>
-                    <td>${entry.sysdate}</td>
+                    <td data-label="#">${index + 1}</td>
+                    <td data-label="Imię">${entry.name}</td>
+                    <td data-label="Nazwisko">${entry.surname}</td>
+                    <td data-label="Formuła">${entry.formula}</td>
+                    <td data-label="Kategoria">${entry.category}</td>
+                    <td data-label="Waga">${entry.weight}</td>
+                    <td data-label="Wiek">${entry.age}</td>
+                    <td data-label="Klub">${entry.club}</td>
+                    <td data-label="Email">${entry.email}</td>
+                    <td data-label="Telefon">${entry.phone}</td>
+                    <td data-label="IP użytkownika">${entry.ip}</td>
+                    <td data-label="Data zgłoszenia">${entry.sysdate}</td>
                 `;
                 tableBody.appendChild(row);
             });
