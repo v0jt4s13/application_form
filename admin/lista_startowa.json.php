@@ -1,10 +1,11 @@
 <?php
 // file_put_contents("debug_post.log", print_r($_POST, true));
 
+require("../global.php");
 header('Content-Type: application/json');
 // header('Content-Type: text/html; charset=UTF-8');
 
-$dataFile = '../entry_form/form_response_data/zgloszenia.json';
+$dataFile = $dataFolder . "/zgloszenia.json";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!file_exists($dataFile) || filesize($dataFile) == 0) {

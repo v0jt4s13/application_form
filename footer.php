@@ -11,9 +11,10 @@
 
 
 <div class="btn-container" style="display: none">
+    <div class="btn-style"><?php echo $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']; ?></div>
     <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
     <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>
     <button class="btn-style" onclick="changeFontStyle()">Zmień czcionkę</button>
 </div>
 <link rel="stylesheet" href="<?php echo $global_domain; ?>/static/css/dev-styles.css">
-  <script src="<?php echo $global_domain; ?>/static/js/dev-scripts.js" defer></script>
+<script src="<?php echo $global_domain; ?>/static/js/dev-scripts.js" defer></script>
