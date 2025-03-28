@@ -19,6 +19,12 @@ if (!file_exists($dataFolder)) {
 // Generowanie unikalnego identyfikatora sesji
 $sessionId = bin2hex(random_bytes(16));
 $date = date('Y-m-d H:i:s');
+$ip = isset($_SERVER['HTTP_CLIENT_IP']) 
+    ? $_SERVER['HTTP_CLIENT_IP'] 
+    : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) 
+      ? $_SERVER['HTTP_X_FORWARDED_FOR'] 
+      : $_SERVER['REMOTE_ADDR']);
+
 // Odbiór danych z formularza
 $newEntry = [
     'formula' => $_POST['formula'] ?? '',
@@ -31,7 +37,8 @@ $newEntry = [
     'email' => $_POST['email'] ?? '',
     'phone' => $_POST['phone'] ?? '',
     'sessionId' => $sessionId,
-    'sysdate' => $date
+    'sysdate' => $date,
+    'user_ip' => $ip
 ];
 
 // Odczyt istniejących danych

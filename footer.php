@@ -11,6 +11,14 @@
 
 
 <div class="btn-container" style="display: none">
+    <?php
+    $ip = isset($_SERVER['HTTP_CLIENT_IP'])
+      ? $_SERVER['HTTP_CLIENT_IP']
+      : (isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+        ? $_SERVER['HTTP_X_FORWARDED_FOR']
+        : $_SERVER['REMOTE_ADDR']);
+    ?>
+    <div class="btn-style"><?php echo $ip; ?></div>
     <div class="btn-style"><?php echo $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']; ?></div>
     <button class="btn-style" onclick="changeBackground()">Zmień tło</button>
     <button class="btn-style" onclick="changeFontColor()">Zmień kolor tekstu</button>

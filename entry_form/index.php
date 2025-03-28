@@ -311,19 +311,19 @@
             return true;
         }
 
-        let submitClickCount = 0;
-        const submitThreshold = 10;
+        /*let submitClickCount = 0;
+        const submitThreshold = 10;*/
 
         function submitForm(event) {
             event.preventDefault();
-            submitClickCount++;
+            /*submitClickCount++;
 
             if (submitClickCount < submitThreshold) {
                 logDebug(`Kliknięcie ${submitClickCount}/${submitThreshold} – jeszcze nie wysyłam.`);
                 return;
             }
             // reset, żeby można było wysłać jeszcze raz
-            submitClickCount = 0;
+            submitClickCount = 0;*/
 
             if (!validateAge()) {
                 logDebug("Błąd: Wiek nie pasuje do wybranej kategorii.");
